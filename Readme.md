@@ -39,7 +39,7 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks.
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/your-username/profile-card-generator.git
+   git clone https://github.com/your-username/User-Profile-Card-Generator.git
 
 
 
