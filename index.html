@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Card Generator</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <main class="container">
+
+    <!-- FORM -->
+    <section class="form" aria-labelledby="formTitle">
+      <h2 id="formTitle">Profile Generator</h2>
+
+      <button id="themeToggle" aria-label="Toggle light or dark theme">🌙 Dark Mode</button>
+      <label for="name">Name</label>
+      <input id="name" placeholder="Name" />
+      <label for="role">Role</label>
+      <input id="role" placeholder="Role" />
+      <label for="image">Image</label>
+      <input id="image" placeholder="Image URL" />
+      <label for="link">Profile Link</label>
+      <input id="link" placeholder="Profile Link" />
+      <label for="bio">Bio</label>
+      <textarea id="bio" placeholder="Short bio"></textarea>
+
+      <select id="sizePreset">
+        <option value="square">Instagram (1:1)</option>
+        <option value="wide">LinkedIn (3:2)</option>
+      </select>
+    </section>
+
+    <!-- PREVIEW -->
+    <section class="card-wrapper">
+      <div class="card square" id="profileCard"   aria-live="polite">
+        <img id="cardImage" alt="Profile avatar" />
+        <h3 id="cardName">Your Name</h3>
+        <p id="cardRole">Your Role</p>
+        <p id="cardBio">Your bio will appear here.</p>
+        <a id="cardLink" target="_blank">Visit Profile</a>
+      </div>
+
+      <div class="actions">
+        <button id="downloadPng" aria-label="Download profile card as PNG">Download PNG</button>
+        <button id="downloadJpg" aria-label="Download profile card as JPG">Download JPG</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
