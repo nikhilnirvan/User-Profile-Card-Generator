@@ -1,6 +1,5 @@
 const DEFAULT_AVATAR = "https://via.placeholder.com/100?text=User";
 
-
 // Inputs
 const inputs = {
   name: document.getElementById("name"),
@@ -21,7 +20,7 @@ const cardUI = {
   link: document.getElementById("cardLink")
 };
 
-// ---------- UPDATE CARD ----------
+// Update card
 function updateCard() {
   cardUI.name.textContent = inputs.name.value || "Your Name";
   cardUI.role.textContent = inputs.role.value || "Your Role";
@@ -30,38 +29,24 @@ function updateCard() {
   cardUI.link.href = inputs.link.value || "#";
 
   const imageUrl = inputs.image.value.trim();
-
-  if (imageUrl) {
-    cardUI.image.src = imageUrl;
-    cardUI.image.dataset.fallback = "false";
-  } else {
-    cardUI.image.src = DEFAULT_AVATAR;
-  }
-
-  cardUI.image.alt = inputs.name.value
-    ? `${inputs.name.value}'s profile picture`
-    : "Default profile avatar";
+  cardUI.image.src = imageUrl ? imageUrl : DEFAULT_AVATAR;
 }
 
-// ---------- IMAGE FALLBACK ----------
+// Image fallback
 cardUI.image.onerror = () => {
- if (cardUI.image.dataset.fallback !== "true") {
-    cardUI.image.dataset.fallback = "true";
-    cardUI.image.src = DEFAULT_AVATAR;
-  }
+  cardUI.image.src = DEFAULT_AVATAR;
 };
 
-// ---------- SIZE PRESET ----------
+// Size preset
 inputs.size.addEventListener("change", () => {
   card.className = `card ${inputs.size.value}`;
 });
 
-// ---------- THEME ----------
-document.getElementById("themeToggle").addEventListener("click", () => {
+// Theme toggle
+document.getElementById("themeToggle").onclick = () =>
   document.body.classList.toggle("light");
-});
 
-// ---------- DOWNLOAD ----------
+// Download
 function download(type) {
   html2canvas(card, { scale: 2 }).then(canvas => {
     const link = document.createElement("a");
@@ -74,20 +59,26 @@ function download(type) {
   });
 }
 
+
 document.getElementById("downloadPng").onclick = () => download("png");
 document.getElementById("downloadJpg").onclick = () => download("jpg");
 
-// ---------- RESET (UI ONLY) ----------
-document.getElementById("resetProfile").addEventListener("click", () => {
-  Object.values(inputs).forEach(input => (input.value = ""));
-  card.className = "card square";
+// Reset (keeps size preset)
+document.getElementById("resetProfile").onclick = () => {
+  inputs.name.value = "";
+  inputs.role.value = "";
+  inputs.image.value = "";
+  inputs.bio.value = "";
+  inputs.link.value = "";
+
   cardUI.image.src = DEFAULT_AVATAR;
   updateCard();
-});
+};
 
-// ---------- INIT ----------
-updateCard();
-
+// Input listeners
 Object.values(inputs).forEach(input =>
   input.addEventListener("input", updateCard)
 );
+
+// Initial render
+updateCard();
